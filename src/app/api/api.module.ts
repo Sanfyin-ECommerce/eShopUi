@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { CatalougeService } from './services/catalouge.service';
@@ -14,7 +14,9 @@ import { UserAccessService } from './services/user-access.service';
  * Module that provides all services and configuration.
  */
 @NgModule({
-  imports: [],
+  imports: [
+    HttpClientModule
+  ],
   exports: [],
   declarations: [],
   providers: [
@@ -39,7 +41,7 @@ export class ApiModule {
     }
   }
 
-  constructor( 
+  constructor(
     @Optional() @SkipSelf() parentModule: ApiModule,
     @Optional() http: HttpClient
   ) {

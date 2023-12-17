@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { Product, ProductList } from '../../api/models';
 
 @Component({
-  selector: 'app-dashbaord',
-  templateUrl: './dashbaord.component.html',
-  styleUrls: ['./dashbaord.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class DashbaordComponent {
+export class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -30,4 +31,12 @@ export class DashbaordComponent {
       ];
     })
   );
+
+  products:Product[] = []
+
+  constructor()
+  {
+
+  }
+
 }
