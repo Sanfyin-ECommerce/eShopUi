@@ -15,7 +15,7 @@ export interface ApiProductsCategoriesCategoryUrlGet$Plain$Params {
 export function apiProductsCategoriesCategoryUrlGet$Plain(http: HttpClient, rootUrl: string, params: ApiProductsCategoriesCategoryUrlGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductList>> {
   const rb = new RequestBuilder(rootUrl, apiProductsCategoriesCategoryUrlGet$Plain.PATH, 'get');
   if (params) {
-    rb.path('categoryUrl', params.categoryUrl, {"style":"simple"});
+    rb.path('categoryUrl', params, {"style":"simple"});
   }
 
   return http.request(

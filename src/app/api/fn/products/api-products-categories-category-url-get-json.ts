@@ -15,7 +15,7 @@ export interface ApiProductsCategoriesCategoryUrlGet$Json$Params {
 export function apiProductsCategoriesCategoryUrlGet$Json(http: HttpClient, rootUrl: string, params: ApiProductsCategoriesCategoryUrlGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductList>> {
   const rb = new RequestBuilder(rootUrl, apiProductsCategoriesCategoryUrlGet$Json.PATH, 'get');
   if (params) {
-    rb.path('categoryUrl', params.categoryUrl, {"style":"simple"});
+    rb.path('categoryUrl', params, {"style":"simple"});
   }
 
   return http.request(
