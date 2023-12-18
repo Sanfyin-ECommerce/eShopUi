@@ -207,6 +207,7 @@ export class ProductsService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiProductsFeaturedGet$Json$Response(params?: ApiProductsFeaturedGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductList>> {
+    debugger
     return apiProductsFeaturedGet$Json(this.http, this.rootUrl, params, context);
   }
 

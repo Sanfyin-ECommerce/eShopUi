@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { Product, ProductList } from '../../api/models';
+import { Product, ProductList, ProductType, ProductTypeList } from '../../api/models';
+import { ProductTypesService, ProductsService } from '../../api/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,10 +33,26 @@ export class DashboardComponent {
     })
   );
 
-  products:Product[] = []
+  products:ProductList = {}
+  productTypeList:ProductTypeList = {}
 
-  constructor()
+  constructor(private _ps:ProductsService, private _pts:ProductTypesService)
   {
+    // ps.GetProducts().subscribe( res => {
+
+    //   console.log(res);
+    //   this.products = res.products;
+    // })
+      _ps.apiProductsGet$Json$Response().subscribe( res => {
+        console.log(res);
+        this.products = res.body;
+        _pts.apiProductTypesGet$Json$Response().subscribe( res => {
+          console.log(res);
+          this.productTypeList = res.body;
+        });
+      });
+
+      
 
   }
 

@@ -1,12 +1,14 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-      <mat-grid-tile>
-        @for ( product of products; track products) {
+  <mat-grid-list cols="1" rowHeight="350px">
+      
+        @for ( product of products.products; track products) {
 
-          <sc-product title="{{ product.title }}"></sc-product>
+          <mat-grid-tile>
+          <sc-product [product]="product" [productTypes]="productTypeList.productTypes!"></sc-product>
+        </mat-grid-tile>
         }
 
-      </mat-grid-tile>
+
   </mat-grid-list>
 </div>

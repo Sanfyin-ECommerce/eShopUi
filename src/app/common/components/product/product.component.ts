@@ -1,18 +1,29 @@
-import { Component, Input } from '@angular/core';
-import { ProductVariant } from '../../../api/models';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product, ProductType, ProductVariant } from '../../../api/models';
 
 @Component({
   selector: 'sc-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
 
-  @Input() title = '';
-  @Input() id = 0;
-  @Input() description = "";
-  @Input() variants:ProductVariant[] = [];
+  @Input() product:Product = {};
+
+  @Input() productTypes:ProductType[] = [];
 
   selectedVariant:string = "";
+
+  productVariant:ProductVariant[] = []
+
+  ngOnInit(): void {
+
+    this.product.variants?.forEach( x => {
+      debugger
+      x.productTypeName = this.productTypes?.filter( y => y.id === x.productTypeId).map( z => z.name).toString();
+      x.productTypeType = this.productTypes?.filter( y => y.id === x.productTypeId).map( z => z.type).toString();
+
+    })
+  }
 
 }

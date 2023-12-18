@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiConfiguration {
-  rootUrl: string = 'https://ecommerce-webapi.ngmhospital.in/';
+  rootUrl: string = 'https://ecommerce-webapi.ngmhospital.in';
 }
 
 /**
