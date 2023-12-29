@@ -9,13 +9,12 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { ProductTypeDto } from '../models/product-type-dto';
-import { ProductTypeListDto } from '../models/product-type-list-dto';
+import { ProfileDto } from '../models/profile-dto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductTypesService extends BaseService {
+export class ProfileService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -24,23 +23,23 @@ export class ProductTypesService extends BaseService {
   }
 
   /**
-   * Path part for operation apiProductTypesGet
+   * Path part for operation apiProfileGet
    */
-  static readonly ApiProductTypesGetPath = '/api/ProductTypes';
+  static readonly ApiProfileGetPath = '/api/Profile';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiProductTypesGet$Plain()` instead.
+   * To access only the response body, use `apiProfileGet$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiProductTypesGet$Plain$Response(params?: {
+  apiProfileGet$Plain$Response(params?: {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<ProductTypeListDto>> {
+): Observable<StrictHttpResponse<ProfileDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ProductTypesService.ApiProductTypesGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ProfileService.ApiProfileGetPath, 'get');
     if (params) {
     }
 
@@ -51,41 +50,41 @@ export class ProductTypesService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<ProductTypeListDto>;
+        return r as StrictHttpResponse<ProfileDto>;
       })
     );
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiProductTypesGet$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `apiProfileGet$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiProductTypesGet$Plain(params?: {
+  apiProfileGet$Plain(params?: {
   },
   context?: HttpContext
 
-): Observable<ProductTypeListDto> {
+): Observable<ProfileDto> {
 
-    return this.apiProductTypesGet$Plain$Response(params,context).pipe(
-      map((r: StrictHttpResponse<ProductTypeListDto>) => r.body as ProductTypeListDto)
+    return this.apiProfileGet$Plain$Response(params,context).pipe(
+      map((r: StrictHttpResponse<ProfileDto>) => r.body as ProfileDto)
     );
   }
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiProductTypesGet$Json()` instead.
+   * To access only the response body, use `apiProfileGet$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiProductTypesGet$Json$Response(params?: {
+  apiProfileGet$Json$Response(params?: {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<ProductTypeListDto>> {
+): Observable<StrictHttpResponse<ProfileDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ProductTypesService.ApiProductTypesGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ProfileService.ApiProfileGetPath, 'get');
     if (params) {
     }
 
@@ -96,47 +95,47 @@ export class ProductTypesService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<ProductTypeListDto>;
+        return r as StrictHttpResponse<ProfileDto>;
       })
     );
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiProductTypesGet$Json$Response()` instead.
+   * To access the full response (for headers, for example), `apiProfileGet$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiProductTypesGet$Json(params?: {
+  apiProfileGet$Json(params?: {
   },
   context?: HttpContext
 
-): Observable<ProductTypeListDto> {
+): Observable<ProfileDto> {
 
-    return this.apiProductTypesGet$Json$Response(params,context).pipe(
-      map((r: StrictHttpResponse<ProductTypeListDto>) => r.body as ProductTypeListDto)
+    return this.apiProfileGet$Json$Response(params,context).pipe(
+      map((r: StrictHttpResponse<ProfileDto>) => r.body as ProfileDto)
     );
   }
 
   /**
-   * Path part for operation apiProductTypesPost
+   * Path part for operation apiProfilePost
    */
-  static readonly ApiProductTypesPostPath = '/api/ProductTypes';
+  static readonly ApiProfilePostPath = '/api/Profile';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiProductTypesPost()` instead.
+   * To access only the response body, use `apiProfilePost()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiProductTypesPost$Response(params?: {
-    body?: ProductTypeDto
+  apiProfilePost$Response(params?: {
+    body?: ProfileDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ProductTypesService.ApiProductTypesPostPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, ProfileService.ApiProfilePostPath, 'post');
     if (params) {
       rb.body(params.body, 'application/*+json');
     }
@@ -155,18 +154,18 @@ export class ProductTypesService extends BaseService {
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiProductTypesPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiProfilePost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiProductTypesPost(params?: {
-    body?: ProductTypeDto
+  apiProfilePost(params?: {
+    body?: ProfileDto
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.apiProductTypesPost$Response(params,context).pipe(
+    return this.apiProfilePost$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

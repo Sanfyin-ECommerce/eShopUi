@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Error } from '../models/error';
+import { Error } from './error';
 export interface ApiErrorResponse {
-  errors?: Array<Error> | null;
+  errors?: null | Array<Error>;
 }

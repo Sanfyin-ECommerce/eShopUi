@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface Image {
-  data?: string | null;
+export interface ImageDto {
+  data?: null | string;
   id?: number;
 }

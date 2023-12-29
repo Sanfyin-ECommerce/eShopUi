@@ -1,28 +1,31 @@
 /* tslint:disable */
 /* eslint-disable */
-import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
-import { apiUserAccessConfirmRegistrationIdPost } from '../fn/user-access/api-user-access-confirm-registration-id-post';
-import { ApiUserAccessConfirmRegistrationIdPost$Params } from '../fn/user-access/api-user-access-confirm-registration-id-post';
-import { apiUserAccessLoginPost } from '../fn/user-access/api-user-access-login-post';
-import { ApiUserAccessLoginPost$Params } from '../fn/user-access/api-user-access-login-post';
-import { apiUserAccessRegisterPost } from '../fn/user-access/api-user-access-register-post';
-import { ApiUserAccessRegisterPost$Params } from '../fn/user-access/api-user-access-register-post';
+import { LoginRequest } from '../models/login-request';
+import { RegisterNewUserCommand } from '../models/register-new-user-command';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class UserAccessService extends BaseService {
-  constructor(config: ApiConfiguration, http: HttpClient) {
+  constructor(
+    config: ApiConfiguration,
+    http: HttpClient
+  ) {
     super(config, http);
   }
 
-  /** Path part for operation `apiUserAccessRegisterPost()` */
+  /**
+   * Path part for operation apiUserAccessRegisterPost
+   */
   static readonly ApiUserAccessRegisterPostPath = '/api/UserAccess/register';
 
   /**
@@ -31,8 +34,28 @@ export class UserAccessService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserAccessRegisterPost$Response(params?: ApiUserAccessRegisterPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiUserAccessRegisterPost(this.http, this.rootUrl, params, context);
+  apiUserAccessRegisterPost$Response(params?: {
+    body?: RegisterNewUserCommand
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserAccessService.ApiUserAccessRegisterPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
   }
 
   /**
@@ -41,13 +64,21 @@ export class UserAccessService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserAccessRegisterPost(params?: ApiUserAccessRegisterPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiUserAccessRegisterPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiUserAccessRegisterPost(params?: {
+    body?: RegisterNewUserCommand
+  },
+  context?: HttpContext
+
+): Observable<void> {
+
+    return this.apiUserAccessRegisterPost$Response(params,context).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
-  /** Path part for operation `apiUserAccessConfirmRegistrationIdPost()` */
+  /**
+   * Path part for operation apiUserAccessConfirmRegistrationIdPost
+   */
   static readonly ApiUserAccessConfirmRegistrationIdPostPath = '/api/UserAccess/confirm-registration/{Id}';
 
   /**
@@ -56,8 +87,28 @@ export class UserAccessService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiUserAccessConfirmRegistrationIdPost$Response(params: ApiUserAccessConfirmRegistrationIdPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiUserAccessConfirmRegistrationIdPost(this.http, this.rootUrl, params, context);
+  apiUserAccessConfirmRegistrationIdPost$Response(params: {
+    Id: string;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserAccessService.ApiUserAccessConfirmRegistrationIdPostPath, 'post');
+    if (params) {
+      rb.path('Id', params.Id, {"style":"simple"});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
   }
 
   /**
@@ -66,13 +117,21 @@ export class UserAccessService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiUserAccessConfirmRegistrationIdPost(params: ApiUserAccessConfirmRegistrationIdPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiUserAccessConfirmRegistrationIdPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiUserAccessConfirmRegistrationIdPost(params: {
+    Id: string;
+  },
+  context?: HttpContext
+
+): Observable<void> {
+
+    return this.apiUserAccessConfirmRegistrationIdPost$Response(params,context).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
-  /** Path part for operation `apiUserAccessLoginPost()` */
+  /**
+   * Path part for operation apiUserAccessLoginPost
+   */
   static readonly ApiUserAccessLoginPostPath = '/api/UserAccess/login';
 
   /**
@@ -81,8 +140,28 @@ export class UserAccessService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserAccessLoginPost$Response(params?: ApiUserAccessLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiUserAccessLoginPost(this.http, this.rootUrl, params, context);
+  apiUserAccessLoginPost$Response(params?: {
+    body?: LoginRequest
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserAccessService.ApiUserAccessLoginPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
   }
 
   /**
@@ -91,9 +170,15 @@ export class UserAccessService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserAccessLoginPost(params?: ApiUserAccessLoginPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiUserAccessLoginPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiUserAccessLoginPost(params?: {
+    body?: LoginRequest
+  },
+  context?: HttpContext
+
+): Observable<void> {
+
+    return this.apiUserAccessLoginPost$Response(params,context).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 

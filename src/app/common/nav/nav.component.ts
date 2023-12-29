@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CategoryList } from '../../api/models';
+import { CategoryListDto } from '../../api/models';
 import { CategoryService } from '../../api/services';
 
 @Component({
@@ -13,7 +13,7 @@ import { CategoryService } from '../../api/services';
 export class NavComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
-  categories:CategoryList = {}
+  categories:CategoryListDto = {}
 
   constructor(private _cs:CategoryService){
     _cs.apiCategoryGet$Json$Response().subscribe( res => {

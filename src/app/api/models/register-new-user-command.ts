@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface RegisterNewUserCommand {
-  email?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
-  password?: string | null;
-  phone?: string | null;
+  email?: null | string;
+  firstName?: null | string;
+  lastName?: null | string;
+  password?: null | string;
+  phone?: null | string;
 }

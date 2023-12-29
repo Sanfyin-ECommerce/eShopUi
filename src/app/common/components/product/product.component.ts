@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Product, ProductType, ProductVariant } from '../../../api/models';
+import { ProductDto, ProductTypeDto, ProductVariantDto } from '../../../api/models';
 
 @Component({
   selector: 'sc-product',
@@ -18,13 +18,13 @@ export class ProductComponent implements OnInit, OnChanges {
     this.selectedVariant = this.productVariant[0];
   }
 
-  @Input() product:Product = {};
+  @Input() product:ProductDto = {};
 
-  @Input() productTypes:ProductType[] = [];
+  @Input() productTypes:ProductTypeDto[] = [];
 
-  selectedVariant:ProductVariant = {};
+  selectedVariant:ProductVariantDto = {};
 
-  productVariant:ProductVariant[] = []
+  productVariant:ProductVariantDto[] = []
 
   ngOnInit(): void {
 

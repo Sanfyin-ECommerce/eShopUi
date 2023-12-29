@@ -1,29 +1,33 @@
 /* tslint:disable */
 /* eslint-disable */
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { CartService } from './services/cart.service';
 import { CatalougeService } from './services/catalouge.service';
 import { CategoryService } from './services/category.service';
+import { OrderService } from './services/order.service';
 import { ProductsService } from './services/products.service';
 import { ProductTypesService } from './services/product-types.service';
+import { ProfileService } from './services/profile.service';
 import { UserAccessService } from './services/user-access.service';
 
 /**
  * Module that provides all services and configuration.
  */
 @NgModule({
-  imports: [
-    HttpClientModule
-  ],
+  imports: [],
   exports: [],
   declarations: [],
   providers: [
+    CartService,
     CatalougeService,
     CategoryService,
+    OrderService,
     ProductsService,
     ProductTypesService,
+    ProfileService,
     UserAccessService,
     ApiConfiguration
   ],
@@ -41,7 +45,7 @@ export class ApiModule {
     }
   }
 
-  constructor(
+  constructor( 
     @Optional() @SkipSelf() parentModule: ApiModule,
     @Optional() http: HttpClient
   ) {
